@@ -22,7 +22,14 @@
     <form action="" method="post">
       {% csrf_token %}
       <input type="text" name="org_name" value="{{ org.name }}" />
+      <input type="text" name="org_description" value="{{ org.description }}" />
+      <input type="text" name="org_services" value="{{ org.services }}" />
+      <input type="text" name="org_phone" value="{{ org.phone }}" />
       <input type="text" name="org_address" value="{{ org.address }}" />
+      <input type="text" name="org_email" value="{{ org.email }}" />
+      <input type="text" name="org_website" value="{{ org.website }}" />
+      <input type="checkbox" name="org_appointment_required" />
+      <input type="text" name="org_for_whom" value="{{ org.for_whom }}" />
     </form>
   </body>
 </html>

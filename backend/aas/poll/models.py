@@ -10,7 +10,7 @@ class Organization(models.Model):
     admin_email = models.CharField(max_length=200)
     website = models.CharField(max_length=200)
     appointment_required = models.BooleanField()
-    restrictions = models.TextField()
+    for_whom = models.TextField()
     def __str__(self):
         return self.name
 
