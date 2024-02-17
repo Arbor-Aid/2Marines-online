@@ -17,6 +17,7 @@ class Organization(models.Model):
         return self.name
 
 class Hours(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     day = models.CharField(max_length=10)
     open_time = models.TimeField()
