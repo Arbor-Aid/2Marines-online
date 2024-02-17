@@ -26,11 +26,11 @@ def OrgEdit(request, org_id = None):
 def OrgSearch(request):
     orgQuery = request.POST['organization']
     orgUrl = urlparse(orgQuery).hostname
-    org = Organization.objects.get(website=orgUrl)
-    if org:
-        return redirect("/poll/edit/{id}/".format(id=org.id))
-    else:
+    try:
+        org = Organization.objects.get(website=orgUrl)
+    except Organization.DoesNotExist:
         return redirect("/poll/edit/")
+    return redirect("/poll/edit/{id}/".format(id=org.id))
 
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
