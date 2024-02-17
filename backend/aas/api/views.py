@@ -3,35 +3,9 @@ from django.http import HttpResponse
 from rest_framework import viewsets, generics
 from urllib.parse import urlparse
 
-from .serializers import OrganizationSerializer
+from .serializers import OrganizationSerializer, HoursSerializer
 
-from .models import Organization
-
-def index(request):
-    return render(request, 'poll/index.html', {})
-
-def OrgInputStart(request):
-    return render(request, 'poll/org_input_start.html', {})
-
-def OrgEdit(request, org_id = None):
-    if org_id is not None:
-        org = Organization.objects.get(pk=org_id)
-    else:
-        org = Organization()
-
-    context = {
-        'org': org,
-    }
-    return render(request, 'poll/org_view.html', context)
-
-def OrgSearch(request):
-    orgQuery = request.POST['organization']
-    orgUrl = urlparse(orgQuery).hostname
-    try:
-        org = Organization.objects.get(website=orgUrl)
-    except Organization.DoesNotExist:
-        return redirect("/poll/edit/")
-    return redirect("/poll/edit/{id}/".format(id=org.id))
+from .models import Organization, Hours
 
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
@@ -69,4 +43,44 @@ class OrganizationDeleteByIdViewSet(generics.DestroyAPIView):
         org_id = self.kwargs['org_id']
         org = Organization.objects.get(id=org_id)
         org.delete()
+        return HttpResponse(status=204)
+
+class HoursViewSet(viewsets.ModelViewSet):
+    queryset = Hours.objects.all()
+    serializer_class = HoursSerializer
+
+class HoursByOrgIdViewSet(generics.ListAPIView):
+    serializer_class = HoursSerializer
+
+    def get_queryset(self):
+        org_id = self.kwargs['org_id']
+        return Hours.objects.filter(organization=org_id)
+
+class HoursByIdViewSet(generics.ListAPIView):
+    serializer_class = HoursSerializer
+
+    def get_queryset(self):
+        hour_id = self.kwargs['hour_id']
+        return Hours.objects.filter(id=hour_id)
+
+class HoursUpdateByIdViewSet(generics.UpdateAPIView):
+    serializer_class = HoursSerializer
+
+    def update(self, request, *args, **kwargs):
+        hour_id = self.kwargs['hour_id']
+        hour = Hours.objects.get(id=hour_id)
+        hour.day = hour.day if 'day' not in request.data else request.data['day']
+        hour.open_time = hour.open_time if 'open_time' not in request.data else request.data['open_time']
+        hour.close_time = hour.close_time if 'close_time' not in request.data else request.data['close_time']
+        hour.save()
+        return HttpResponse(status=204)
+
+
+class HoursDeleteByIdViewSet(generics.DestroyAPIView):
+    serializer_class = HoursSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        hour_id = self.kwargs['hour_id']
+        hour = Hours.objects.get(id=hour_id)
+        hour.delete()
         return HttpResponse(status=204)
