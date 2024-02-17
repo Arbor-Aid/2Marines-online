@@ -75,13 +75,3 @@ A step-by-step series of commands that tell you how to get a development environ
    ```bash
    python manage.py runserver
    ```
-=======
-# arbor-aid
-
-## AAS Dependencies
-- django
-- djangorestframework
-<<<<<<< HEAD
->>>>>>> 194b521 (setup rest)
-=======
->>>>>>> 194b521 (setup rest)
