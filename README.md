@@ -48,28 +48,33 @@ A step-by-step series of commands that tell you how to get a development environ
 #### Backend
 
 1. Ensure Python 3 is installed on your system. You can download it from [python.org](https://www.python.org/downloads/) or install it using your operating system's package manager.
-2. Navigate to the backend directory:
+2. Install django depends
+
+``` bash
+    pip install django djangorestframework
+```
+3. Navigate to the backend directory:
 
    ```bash
    cd path/to/backend
    ```
-3. Create a virtual environment (optional but recommended):
+4. Create a virtual environment (optional but recommended):
 
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
-4. Install Django and other dependencies:
+5. Install Django and other dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
-5. Run Django migrations to set up your database:
+6. Run Django migrations to set up your database:
 
    ```bash
    python manage.py migrate
    ```
-6. Start the Django development server:
+7. Start the Django development server:
 
    ```bash
    python manage.py runserver
