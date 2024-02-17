@@ -11,12 +11,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Arbor Aid App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        // Define the default brightness and colors.
+        brightness: Brightness.dark,
+        primaryColor: Colors.grey[900],
+        
+        // Define the default font family.
+        fontFamily: 'Montserrat',
+
+        // Define the default `AppBarTheme`.
+        appBarTheme: AppBarTheme(
+          color: Colors.grey[900],
+          iconTheme: IconThemeData(color: Colors.white),
+        ), 
       ),
-      home: Directionality(
-        textDirection: TextDirection.ltr,
-        child: HomePage(),
-      ),
+      home: HomePage(),
     );
   }
 }
+
