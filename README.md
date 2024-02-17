@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Arbor-Aid
 
 Python version 3.10
@@ -74,3 +75,10 @@ A step-by-step series of commands that tell you how to get a development environ
    ```bash
    python manage.py runserver
    ```
+=======
+# arbor-aid
+
+## AAS Dependencies
+- django
+- djangorestframework
+>>>>>>> 194b521 (setup rest)
