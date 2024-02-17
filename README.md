@@ -1,6 +1,6 @@
 # Arbor-Aid
 
-Welcome to the Arbor-Aid project! This guide will walk you through setting up your development environment for both the frontend and backend portions of our application.
+Welcome to the Arbor-Aid project. This guide will walk you through setting up your development environment for both the frontend and backend portions of our application.
 
 ## Getting Started
 
