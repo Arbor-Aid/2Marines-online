@@ -16,9 +16,13 @@ class MyApp extends StatelessWidget {
 class DataEntryPage extends StatefulWidget {
   @override
   _DataEntryPageState createState() => _DataEntryPageState();
+  
 }
 
 class _DataEntryPageState extends State<DataEntryPage> {
+  bool isAppointmentRequired = false;
+  List<bool> isSelected = List.generate(7, (_) => false); // For the days of the week
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +47,63 @@ class _DataEntryPageState extends State<DataEntryPage> {
             _buildTextField('Email'),
             SizedBox(height: 10),
             _buildTextField('Website URL'),
+            SizedBox(height: 20),
+            Text('Appointment Required? (Check for yes)'),
+            Checkbox(
+              value: isAppointmentRequired,
+              onChanged: (bool? newValue) {
+                setState(() {
+                  isAppointmentRequired = newValue!;
+                });
+              },
+            ),
+            _buildTextField('Who is this for?'),
+            SizedBox(height: 20),
+            ToggleButtons(
+              borderColor: Colors.transparent,
+              fillColor: Colors.lightBlue.shade50,
+              selectedBorderColor: Colors.blue,
+              selectedColor: Colors.black,
+              borderRadius: BorderRadius.circular(30),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Mon'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Tue'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Wed'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Thu'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Fri'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Sat'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Sun'),
+                ),
+              ],
+              onPressed: (int index) {
+                setState(() {
+                  isSelected[index] = !isSelected[index];
+                });
+              },
+              isSelected: isSelected,
+            ),
+            SizedBox(height: 20),
+            // Add other UI elements here
           ],
         ),
       ),
@@ -56,7 +117,10 @@ class _DataEntryPageState extends State<DataEntryPage> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
+        filled: true,
+        fillColor: Colors.white,
       ),
+      style: TextStyle(color: Colors.black),
       maxLines: maxLines,
     );
   }
