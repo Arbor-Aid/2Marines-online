@@ -1,3 +1,4 @@
+import 'package:arbor_aid_app/dataEntry.dart';
 import 'package:arbor_aid_app/homepage.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         ), 
       ),
       home: HomePage(),
+      routes: {
+        '/dataEntry': (context) => DataEntryPage(), // Data Entry route
+      },
     );
   }
 }
