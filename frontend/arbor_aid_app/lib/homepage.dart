@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
 
-
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
+        /*title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
             'assets/twoMarines.png',
             width: 50,
             height: 50,
           ),
+        ),*/
+        leading: IconButton(
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            child: Image.asset(
+              'assets/twoMarines.png',
+              width: 50,
+              height: 50,
+            ),
+          ),
+          onPressed: () {
+            // Something happens if we press it?
+          },
         ),
         actions: [
           IconButton(
