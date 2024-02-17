@@ -8,7 +8,7 @@ These instructions will help you set up your project locally for development and
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+Before you start, ensure you have the following installed:
 
 - **Flutter**: For frontend development.
 - **Python 3.10**: Required for the backend. Other versions may work but are not officially supported.
