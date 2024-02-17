@@ -5,6 +5,7 @@ class Organization(models.Model):
     description = models.TextField()
     services = models.TextField()
     address = models.CharField(max_length=200)
+    county = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     admin_email = models.CharField(max_length=200)
