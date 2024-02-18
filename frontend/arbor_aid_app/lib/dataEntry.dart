@@ -20,15 +20,68 @@ class DataEntryPage extends StatefulWidget {
 }
 
 class _DataEntryPageState extends State<DataEntryPage> {
+  // Define a TextEditingController for each field
+  final TextEditingController organizationNameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController servicesController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController websiteUrlController = TextEditingController();
+  final TextEditingController whoIsThisForController = TextEditingController();
+  
   bool isAppointmentRequired = false;
   List<bool> isSelected = List.generate(7, (_) => false); // For the days of the week
 
   @override
+  void dispose() {
+    // Dispose the controllers when the state is disposed
+    organizationNameController.dispose();
+    descriptionController.dispose();
+    servicesController.dispose();
+    addressController.dispose();
+    phoneNumberController.dispose();
+    emailController.dispose();
+    websiteUrlController.dispose();
+    whoIsThisForController.dispose();
+    super.dispose();
+  }
+
+  void handleSubmit() {
+    // Here you can handle the data submission, for example:
+    final String organizationName = organizationNameController.text;
+    final String description = descriptionController.text;
+    final String services = servicesController.text;
+    final String address = addressController.text;
+    final String phoneNumber = phoneNumberController.text;
+    final String email = emailController.text;
+    final String websiteUrl = websiteUrlController.text;
+    final String whoIsThisFor = whoIsThisForController.text;
+
+    // For demonstration purposes, we just print the values to the console
+    print('Organization Name: $organizationName');
+    print('Description: $description');
+    print('Services: $services');
+    print('Address: $address');
+    print('Phone Number: $phoneNumber');
+    print('Email: $email');
+    print('Website URL: $websiteUrl');
+    print('Appointment Required: $isAppointmentRequired');
+    print('Who is this for: $whoIsThisFor');
+    print('Days selected: ${isSelected.asMap().entries.where((entry) => entry.value).map((entry) => entry.key).toList()}');
+    
+    // Here you can add your logic to send this data to a server or save it locally...
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Data Entry'),
+       appBar: GradientAppBar(
+        title: 'Data Entry',
+        gradientColors: [const Color.fromARGB(255, 251, 251, 251), Color.fromARGB(194, 60, 60, 60)],
       ),
+      // The rest of your Scaffold body
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -57,14 +110,16 @@ class _DataEntryPageState extends State<DataEntryPage> {
                 });
               },
             ),
-            _buildTextField('Who is this for?'),
+           _buildTextField('Who is this for?'),
             SizedBox(height: 20),
-            ToggleButtons(
-              borderColor: Colors.transparent,
-              fillColor: Colors.lightBlue.shade50,
-              selectedBorderColor: Colors.blue,
-              selectedColor: Colors.black,
-              borderRadius: BorderRadius.circular(30),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: ToggleButtons(
+                borderColor: Colors.transparent,
+                fillColor: Theme.of(context).colorScheme.surface,
+                selectedBorderColor: Theme.of(context).colorScheme.primary,
+                selectedColor: Colors.black,
+                borderRadius: BorderRadius.circular(30),
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -96,32 +151,68 @@ class _DataEntryPageState extends State<DataEntryPage> {
                 ),
               ],
               onPressed: (int index) {
-                setState(() {
-                  isSelected[index] = !isSelected[index];
-                });
-              },
-              isSelected: isSelected,
+                  setState(() {
+                    isSelected[index] = !isSelected[index];
+                  });
+                },
+                isSelected: isSelected,
+              ),
             ),
             SizedBox(height: 20),
-            // Add other UI elements here
+
+            ElevatedButton(
+              onPressed: handleSubmit,
+              child: Text('Submit'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50), // double.infinity is the width and 50 is the height
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
+
   Widget _buildTextField(String label, {int maxLines = 1}) {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: TextStyle(color: Colors.white), // Adjust label color if needed
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        filled: true,
-        fillColor: Colors.white,
+        // Remove filled and fillColor properties if you don't want a white background
       ),
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(color: Colors.white), // Adjust text color if needed
       maxLines: maxLines,
     );
   }
+}
+
+class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final List<Color> gradientColors;
+  final double barHeight = 56.0;
+
+  GradientAppBar({required this.title, required this.gradientColors});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title),
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: gradientColors,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(barHeight);
 }

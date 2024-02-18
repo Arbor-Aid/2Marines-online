@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
 
         // Define the default `AppBarTheme`.
         appBarTheme: AppBarTheme(
-          color: Colors.grey[900],
-          iconTheme: IconThemeData(color: Colors.white),
+          color: Color.fromARGB(255, 232, 232, 232),
+          iconTheme: IconThemeData(color: const Color.fromARGB(255, 250, 250, 250)),
         ), 
       ),
       home: HomePage(),
