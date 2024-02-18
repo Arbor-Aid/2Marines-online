@@ -79,7 +79,7 @@ class _DataEntryPageState extends State<DataEntryPage> {
     return Scaffold(
        appBar: GradientAppBar(
         title: 'Data Entry',
-        gradientColors: [const Color.fromARGB(255, 251, 251, 251), Color.fromARGB(194, 60, 60, 60)],
+        gradientColors: [Colors.white, Colors.grey.shade900],
       ),
       // The rest of your Scaffold body
       body: SingleChildScrollView(
@@ -204,12 +204,13 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+            begin: Alignment.topCenter, // Starts from the top
+            end: Alignment.bottomCenter, // Ends at the bottom
             colors: gradientColors,
           ),
         ),
       ),
+      iconTheme: IconThemeData(color: Colors.white),
     );
   }
 
