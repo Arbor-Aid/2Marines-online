@@ -5,48 +5,44 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        /*title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            'assets/twoMarines.png',
-            width: 50,
-            height: 50,
-          ),
-        ),*/
+        leading: CircleAvatar(
+          radius: 80,
+          backgroundColor: Colors.transparent,
+          backgroundImage: AssetImage('assets/twoMarines.png'),
+        ),
+        /*
         leading: IconButton(
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage('assets/twoMarines.png'),
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Image.asset(
-              'assets/twoMarines.png',
-              width: 50,
-              height: 50,
-            ),
+            width: 65,
+            height: 65,
           ),
           onPressed: () {
-            // Something happens if we press it?
+            
           },
-        ),
+        ), */
         actions: [
           IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {
-              Scaffold.of(context).openDrawer();
+              Scaffold.of(context).openDrawer(); // Or other action
             },
           ),
         ],
       ),
       drawer: Drawer(
-        // Populate the Drawer in the next step.
         child: ListView(
           children: <Widget>[
             ListTile(
               title: Text('Data Entry'),
               onTap: () {
-                // Update the state of the app.
-                Navigator.pushNamed(context, '/dataEntry'); // close the drawer
-                // Navigate to the Data Entry page.
+                Navigator.pushNamed(context, '/dataEntry');
               },
             ),
             // Add other ListTile items here
