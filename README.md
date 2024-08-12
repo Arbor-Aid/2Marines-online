@@ -1,6 +1,6 @@
 # 2Marines online
 
-Welcome to the Arbor-Aid project. This guide will walk you through setting up your development environment for both the frontend and backend portions of our application.
+Welcome to the 2Marines online project. This guide will walk you through setting up your development environment for both the frontend and backend portions of our application.
 
 ## Getting Started
 
