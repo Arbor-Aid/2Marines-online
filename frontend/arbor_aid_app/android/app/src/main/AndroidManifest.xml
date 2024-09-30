@@ -1,6 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.twomarines.twomarinesonline">
+
     <application
-        android:label="arbor_aid_app"
+        android:label="2Marines_online"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

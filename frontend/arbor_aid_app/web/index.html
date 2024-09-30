@@ -36,10 +36,25 @@
 
     <!-- Inject environment variables here -->
     <script>
-        window.env = {
-          API_KEY: "your_api_key_here",
-          OTHER_VAR: "other_value_here"
-        };
+        // Load the .env file
+        fetch('assets/.env')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text();
+            })
+            .then(text => {
+              const env = text.split('\n').reduce((acc, line) => {
+                const [key, value] = line.split('=');
+                acc[key.trim()] = value.trim();
+                return acc;
+              }, {});
+              window.env = env;
+            })
+            .catch(error => {
+              console.error('Error loading .env file:', error);
+            });
     </script>
 
     <!-- This script adds the flutter initialization JS code -->

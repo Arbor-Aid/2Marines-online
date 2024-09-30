@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'service_locator_screen.dart';  // Import your Service Locator Screen here.
-import 'package:flutter_dotenv/flutter_dotenv.dart';  // Import dotenv for env variables
-
-Future<void> main() async {
-  // Ensure that all necessary services are initialized before the app starts
-  await dotenv.load(fileName: ".env");  // Load .env file for API keys or other env variables
-  runApp(const MyApp());
-}
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,15 +7,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('2Marines Dashboard'),
-        ),
-        body: const MyHomePage(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const MyHomePage(),
     );
   }
+}
+
+Future<void> main() async {
+  await dotenv.load(
+      fileName: ".env"); // Updated to reflect the new root location
+  runApp(const MyApp());
 }
 
 class MyHomePage extends StatefulWidget {
@@ -35,16 +32,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  // Removed `const` from _widgetOptions because not all widgets should be `const`
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     const Text('Messages Screen'),
     const Text('Notifications Screen'),
     const Text('Settings Screen'),
-    const ServiceLocatorScreen(),  // Added Service Locator screen, ensure this exists
+    const ServiceLocatorScreen(), // Assuming you have this screen set up
   ];
 
-  // This method handles changing the selected tab
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -54,6 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('2Marines App'),
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -84,7 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// Home Screen widget definition
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -94,7 +91,7 @@ class HomeScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/logo.png',  // Ensure you have this logo image in your assets folder
+          'assets/logo.png', // Make sure this file exists in the assets folder
           height: 100,
           width: 100,
         ),
@@ -105,7 +102,8 @@ class HomeScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ServiceLocatorScreen()),
+              MaterialPageRoute(
+                  builder: (context) => const ServiceLocatorScreen()),
             );
           },
         ),
@@ -133,18 +131,21 @@ class HomeScreen extends StatelessWidget {
             // Implement navigation to profile screen
           },
         ),
+        const SizedBox(height: 16),
+        // Environment variable usage example
+        Text('API URL: ${dotenv.env['OPENAI_API_URL']}'),
       ],
     );
   }
 }
 
-// Dashboard Section Widget
 class DashboardSection extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
 
-  const DashboardSection({super.key, 
+  const DashboardSection({
+    super.key,
     required this.icon,
     required this.title,
     required this.onTap,
@@ -173,3 +174,18 @@ class DashboardSection extends StatelessWidget {
   }
 }
 
+class ServiceLocatorScreen extends StatelessWidget {
+  const ServiceLocatorScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Service Locator"),
+      ),
+      body: const Center(
+        child: Text("Service Locator Page"),
+      ),
+    );
+  }
+}

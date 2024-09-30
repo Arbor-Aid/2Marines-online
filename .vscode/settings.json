@@ -1,0 +1,7 @@
+{
+    "cSpell.words": [
+        "dotenv"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
+}
