@@ -11,5 +11,8 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+<<<<<<< HEAD
 # Add this line
 .env
+=======
+>>>>>>> 27a9723a0e12c4c078243042e84a5a4b3a137bf8

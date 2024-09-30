@@ -15,5 +15,8 @@ x86/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
+<<<<<<< HEAD
 # Add this line
 .env
+=======
+>>>>>>> 27a9723a0e12c4c078243042e84a5a4b3a137bf8
